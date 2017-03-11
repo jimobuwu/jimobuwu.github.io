@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>c++11特性简介 | QUAKE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="右值引用&amp;amp;&amp;amp; 移动语义（std::move）C++在用临时对象或函数返回值给左值对象赋值时的深度拷贝，会影响执行效率。考虑到临时对象的生命期仅在表达式中持续，如果把临时对象的内容直接移动（move）给被赋值的左值对象，效率改善将是显著的。
+总结：消除两个对象交互时不必要的对象拷贝，节省运算存储资源，提高效率。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++11特性简介">
+<meta property="og:url" content="https://github.com/jimobuwu/jimobuwu.github.io/2016/12/04/c-11-introduce/index.html">
+<meta property="og:site_name" content="QUAKE">
+<meta property="og:description" content="右值引用&amp;amp;&amp;amp; 移动语义（std::move）C++在用临时对象或函数返回值给左值对象赋值时的深度拷贝，会影响执行效率。考虑到临时对象的生命期仅在表达式中持续，如果把临时对象的内容直接移动（move）给被赋值的左值对象，效率改善将是显著的。
+总结：消除两个对象交互时不必要的对象拷贝，节省运算存储资源，提高效率。">
+<meta property="og:updated_time" content="2017-03-11T17:26:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c++11特性简介">
+<meta name="twitter:description" content="右值引用&amp;amp;&amp;amp; 移动语义（std::move）C++在用临时对象或函数返回值给左值对象赋值时的深度拷贝，会影响执行效率。考虑到临时对象的生命期仅在表达式中持续，如果把临时对象的内容直接移动（move）给被赋值的左值对象，效率改善将是显著的。
+总结：消除两个对象交互时不必要的对象拷贝，节省运算存储资源，提高效率。">
+  
+    <link rel="alternate" href="/atom.xml" title="QUAKE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">QUAKE</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/jimobuwu/jimobuwu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-c-11-introduce" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/04/c-11-introduce/" class="article-date">
+  <time datetime="2016-12-03T17:10:03.000Z" itemprop="datePublished">2016-12-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C-11/">C++11</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      c++11特性简介
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="右值引用-amp-amp-移动语义（std-move）"><a href="#右值引用-amp-amp-移动语义（std-move）" class="headerlink" title="右值引用&amp;&amp; 移动语义（std::move）"></a>右值引用&amp;&amp; 移动语义（std::move）</h4><p>C++在用临时对象或函数返回值给左值对象赋值时的深度拷贝，会影响执行效率。<br>考虑到临时对象的生命期仅在表达式中持续，如果把临时对象的内容直接移动（move）给被赋值的左值对象，效率改善将是显著的。</p>
+<p>总结：消除两个对象交互时不必要的对象拷贝，节省运算存储资源，提高效率。<br><a id="more"></a></p>
+<h4 id="初始化列表initializer-list"><a href="#初始化列表initializer-list" class="headerlink" title="初始化列表initializer_list"></a>初始化列表initializer_list</h4><p>一个initializer_list当出现在以下两种情况的被自动构造：</p>
+<ul>
+<li>当初始化的时候使用的是大括号初始化，被自动构造。包括函数调用时和赋值</li>
+<li>当涉及到for（initializer： list）,list被自动构造成initializer_list对象</li>
+</ul>
+<p>也就是说initializer_list对象只能用大括号{}初始化。<br>拷贝一个initializer_list对象并不会拷贝里面的元素。其实只是引用而已。而且里面的元素全部都是const的。<br><strong>方便了STL中容器的初始化。</strong></p>
+<h4 id="emplace-back减少内存拷贝和移动"><a href="#emplace-back减少内存拷贝和移动" class="headerlink" title="emplace_back减少内存拷贝和移动"></a>emplace_back减少内存拷贝和移动</h4><p>emplace_back能就地通过参数构造对象，不需要拷贝或者移动内存，相比push_back能更好地避免内存的拷贝与移动，使容器插入元素的性能得到进一步提升。</p>
+<h4 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h4><p>lambda 表达式可以方便地构造匿名函数<br>C++11 的 lambda 表达式规范如下：<br>        [ capture ] ( params ) mutable exception attribute -&gt; ret { body }(1)<br>        [ capture ] ( params ) -&gt; ret { body }(2)<br>        [ capture ] ( params ) { body }(3)<br>        [ capture ] { body }(4)<br>其中,</p>
+<pre><code>* (1) 是完整的 lambda 表达式形式，
+* (2) const 类型的 lambda 表达式，该类型的表达式不能改捕获(&quot;capture&quot;)列表中的值。
+* (3)省略了返回值类型的 lambda 表达式，但是该 lambda 表达式的返回类型可以按照下列规则推演出来：
+* 
+    * 如果 lambda 代码块中包含了 return 语句，则该 lambda 表达式的返回类型由 return 语句的返回类型确定。
+    * 如果没有 return 语句，则类似 void f(...) 函数。
+
+* 省略了参数列表，类似于无参函数 f()。
+</code></pre><p><strong>capture指定了在可见域范围内 lambda 表达式的代码内可见得外部变量的列表，具体解释如下</strong></p>
+<pre><code>* [] 什么也没有捕获
+* [a, &amp;b] 按值捕获a，按引用捕获b
+* [&amp;] 按引用捕获任何用到的外部变量
+* [=] 按值捕获任何用到的外部变量
+* [a, &amp;] 按值捕获a, 其它的变量按引用捕获
+* [&amp;b, =] 按引用捕获b,其它的变量按值捕获
+* [this] 按值捕获this指针
+</code></pre><h4 id="强类型枚举（枚举类）"><a href="#强类型枚举（枚举类）" class="headerlink" title="强类型枚举（枚举类）"></a>强类型枚举（枚举类）</h4><p>普通枚举的缺点：</p>
+<ul>
+<li>枚举类型不是类型安全的。两种不同的枚举类型之间可以进行比较。</li>
+<li><p>两个不同的枚举，不可以有相同的枚举名。</p>
+<pre><code>enum class Enumeration
+{
+Val1,
+Val2,
+Val3 = 100,
+Val4 /* = 101 */,
+};
+</code></pre></li>
+</ul>
+<p>此种枚举为类型安全的。枚举类型不能隐式地转换为整数；也无法与整数数值做比较。<br>枚举类型的语汇范围(scoping)定义于枚举类型的名称范围中。为了兼容性，也可以在一般范围内使用。</p>
+<h4 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h4><h4 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h4><p>shared_ptr<br>unique_ptr</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/jimobuwu/jimobuwu.github.io/2016/12/04/c-11-introduce/" data-id="cj05iyrvl0004ul1uy92ugluo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/04/han-nuo-ta/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          汉诺塔
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/04/binary-search/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">二分查找</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/C-11/">C++11</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cocos2d-x/">Cocos2d-x</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cocos2d-x优化/">Cocos2d-x优化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shader/">shader</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔试题/">笔试题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/07/mian-shi-1/">JJ笔试题</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/05/shader-gray/">shader置灰</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/05/ndk-crash-log/">利用NDK崩溃日志查找BUG</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/04/han-nuo-ta/">汉诺塔</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/04/c-11-introduce/">c++11特性简介</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 LL<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

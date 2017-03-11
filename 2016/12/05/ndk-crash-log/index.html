@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>利用NDK崩溃日志查找BUG | QUAKE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="利用Android的crash log来对C++开发的Android应用进行错误定位。通用操作系统都有自己的日志系统，Android也不例外。但是Android的系统日志，打印的都是内存的地址和寄存器信息。如：
+- ::35.331 23889 23889 I DEBUG : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用NDK崩溃日志查找BUG">
+<meta property="og:url" content="https://github.com/jimobuwu/jimobuwu.github.io/2016/12/05/ndk-crash-log/index.html">
+<meta property="og:site_name" content="QUAKE">
+<meta property="og:description" content="利用Android的crash log来对C++开发的Android应用进行错误定位。通用操作系统都有自己的日志系统，Android也不例外。但是Android的系统日志，打印的都是内存的地址和寄存器信息。如：
+- ::35.331 23889 23889 I DEBUG : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *">
+<meta property="og:updated_time" content="2017-03-11T17:26:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用NDK崩溃日志查找BUG">
+<meta name="twitter:description" content="利用Android的crash log来对C++开发的Android应用进行错误定位。通用操作系统都有自己的日志系统，Android也不例外。但是Android的系统日志，打印的都是内存的地址和寄存器信息。如：
+- ::35.331 23889 23889 I DEBUG : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *">
+  
+    <link rel="alternate" href="/atom.xml" title="QUAKE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">QUAKE</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/jimobuwu/jimobuwu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ndk-crash-log" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/05/ndk-crash-log/" class="article-date">
+  <time datetime="2016-12-05T14:00:41.000Z" itemprop="datePublished">2016-12-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      利用NDK崩溃日志查找BUG
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>利用Android的crash log来对C++开发的Android应用进行错误定位。<br>通用操作系统都有自己的日志系统，Android也不例外。但是Android的系统日志，打印的都是内存的地址和寄存器信息。<br>如：</p>
+<pre><code>- ::35.331 23889 23889 I DEBUG : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** 
+- ::35.331 23889 23889 I DEBUG : Build fingerprint: google/razorg/deb:4.4.2/KOT49H/937116:user/release-keys 
+- ::35.331 23889 23889 I DEBUG : Revision: 
+- ::35.331 23889 23889 I DEBUG : pid: , tid: , name: Thread- &gt;&gt;&gt; com.guangyou.ddgame &lt;&lt;&lt; 
+- ::35.331 23889 23889 I DEBUG : signal (SIGSEGV), code (SEGV_MAPERR), fault addr 00000028 
+- ::35.431 D audio_hw_primary: out_set_parameters: enter: usecase(: deep-buffer-playback) kvpairs: routing= 
+- ::35.511 23889 23889 I DEBUG : r0 76d94458 r1 00000000 r2 00000000 r3 00000000 
+- ::35.511 23889 23889 I DEBUG : r4 760c1a48 r5 751e2440 r6 00000001 r7 760c1a48 
+- ::35.511 23889 23889 I DEBUG : r8 00000001 r9 76c96f3c sl 76c861c0 fp 76d94444 
+- ::35.511 23889 23889 I DEBUG : ip 00000001 sp 76d94430 lr 75a81bd8 pc 75a81bdc cpsr 600f0010 
+- ::35.511 23889 23889 I DEBUG : d0 746968775f327865 d1 6a6e6169642f675f 
+- ::35.511 23889 23889 I DEBUG : d2 5f6f616978757169 d3 676e702e6e776f6d 
+- ::35.511 23889 23889 I DEBUG : d4 0000000009000000 d5 0000000000000000 
+- ::35.511 23889 23889 I DEBUG : d6 0000000000000000 d7 0000000000000000
+</code></pre><h2 id="怎样获取android的系统日志"><a href="#怎样获取android的系统日志" class="headerlink" title="怎样获取android的系统日志"></a>怎样获取android的系统日志</h2><p>假设你已经安装了 Android Develop Tools, 可以成功调用 adb . 并打开android开发用机的调试模式, 连接到电脑.<br>打开命令行, 在命令行输入: adb logcat . 就可以看到满屏幕的日志啦.<br>输入 adb logcat –help 可以看到 logcat 的用法提示.<br>两个常用参数：</p>
+<pre><code>1. -v XXXX : 用来选择log输出样式, 一般建议 threadtime , 更加详细.
+2. -d : 让log一次性输出后马上完毕. 如果没有此命令, logcat 工具会一直输出, 即使更新在界面上.
+</code></pre><p>如果需要保存log到文件, 方便以后查看. 可输入命令:<br>        <strong>adb logcat -v threadtime -d &gt; log.txt</strong></p>
+<p>输出到文件中的是一段时间内的log(大概从凌晨<strong>3点</strong>开始,一直到敲完cmd命令时)   </p>
+<p>adb工具在<strong>\android-sdk-windows\platform-tools</strong>下</p>
+<p>未完待续</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/jimobuwu/jimobuwu.github.io/2016/12/05/ndk-crash-log/" data-id="cj05iyrvw000bul1uwzgjwznv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/05/shader-gray/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          shader置灰
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/04/han-nuo-ta/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">汉诺塔</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/C-11/">C++11</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cocos2d-x/">Cocos2d-x</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cocos2d-x优化/">Cocos2d-x优化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shader/">shader</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔试题/">笔试题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/07/mian-shi-1/">JJ笔试题</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/05/shader-gray/">shader置灰</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/05/ndk-crash-log/">利用NDK崩溃日志查找BUG</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/04/han-nuo-ta/">汉诺塔</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/04/c-11-introduce/">c++11特性简介</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 LL<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
