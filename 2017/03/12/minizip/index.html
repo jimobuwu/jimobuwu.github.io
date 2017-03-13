@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>minizip | QUAKE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="minizip简介minizip时zlib的上层库，它封装了与zip文件相关的操作。minizip中与解压缩相关的API:  
+
+unzFile unzOpen(const char *path);打开压缩文件
+
+int unzGetGlobalInfo(unzFile file, unz_global_info* pglobal_info);获取zip压缩文件的信息（内部文件个数），保存在pgl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="minizip">
+<meta property="og:url" content="https://github.com/jimobuwu/jimobuwu.github.io/2017/03/12/minizip/index.html">
+<meta property="og:site_name" content="QUAKE">
+<meta property="og:description" content="minizip简介minizip时zlib的上层库，它封装了与zip文件相关的操作。minizip中与解压缩相关的API:  
+
+unzFile unzOpen(const char *path);打开压缩文件
+
+int unzGetGlobalInfo(unzFile file, unz_global_info* pglobal_info);获取zip压缩文件的信息（内部文件个数），保存在pgl">
+<meta property="og:updated_time" content="2017-03-12T03:57:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="minizip">
+<meta name="twitter:description" content="minizip简介minizip时zlib的上层库，它封装了与zip文件相关的操作。minizip中与解压缩相关的API:  
+
+unzFile unzOpen(const char *path);打开压缩文件
+
+int unzGetGlobalInfo(unzFile file, unz_global_info* pglobal_info);获取zip压缩文件的信息（内部文件个数），保存在pgl">
+  
+    <link rel="alternate" href="/atom.xml" title="QUAKE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">QUAKE</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/jimobuwu/jimobuwu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-minizip" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/12/minizip/" class="article-date">
+  <time datetime="2017-03-11T18:18:28.000Z" itemprop="datePublished">2017-03-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/工具库/">工具库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      minizip
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="minizip简介"><a href="#minizip简介" class="headerlink" title="minizip简介"></a>minizip简介</h3><p>minizip时zlib的上层库，它封装了与zip文件相关的操作。<br>minizip中与解压缩相关的API:  </p>
+<ul>
+<li><p><code>unzFile unzOpen(const char *path);</code><br>打开压缩文件</p>
+</li>
+<li><p><code>int unzGetGlobalInfo(unzFile file, unz_global_info* pglobal_info);</code><br>获取zip压缩文件的信息（内部文件个数），保存在pglobal_info</p>
+</li>
+<li><p><code>int unzGoToNextFile(unzFile file)</code><br>遍历zip中的文件，初始自动定位到第一个文件，使用该函数跳转到下一个文件</p>
+</li>
+<li><p><code>int unzGetCurrentFileInfo()</code><br>获取单个内部文件的信息：文件路径，大小</p>
+</li>
+<li><p><code>int unzOpenCurrentFile(unzFile file)</code><br>打开该内部文件  </p>
+</li>
+<li><p><code>int unzReadCurrentFile(unzFile file)</code><br>读取该内部文件 </p>
+</li>
+<li><p><code>int unzCloseCurrentFile(unzFile file)</code><br>关闭内部文件</p>
+</li>
+<li><p><code>int unzClose(unzFile file);</code><br>关闭打开的zip文件</p>
+</li>
+</ul>
+<h3 id="加载相关的头文件及库文件"><a href="#加载相关的头文件及库文件" class="headerlink" title="加载相关的头文件及库文件"></a>加载相关的头文件及库文件</h3><p>在使用zlib以及minizip之前，我们需要加载相关的头文件及库文件到工程中。需要加载的头文件有zlib.h、unzip.h、zip.h。需要加载的库文件有zlib.lib、minizip.lib。需要添加的动态链接库zlib1.dll。这些文件都可以从网上下载得到。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#include &quot;zlib/zlib.h&quot;  </div><div class="line">#include &quot;zlib/unzip.h&quot;  </div><div class="line">#include &quot;zlib/zip.h&quot;  </div><div class="line">#pragma comment(lib, &quot;zlib.lib&quot;)  </div><div class="line">#pragma comment(lib, &quot;minizip.lib&quot;)</div></pre></td></tr></table></figure>
+<h3 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div></pre></td><td class="code"><pre><div class="line">  <span class="number">1</span>  <span class="comment">/*</span></div><div class="line">  2  * 函数功能 :  解压zip文件</div><div class="line">  3  * 备    注 : 参数strFilePath表示zip压缩文件的路径</div><div class="line">  4  *           参数strTempPath表示要解压到的文件目录</div><div class="line">  6  */</div><div class="line">  <span class="number">7</span> <span class="keyword">void</span> CZlibDemoDlg::UnzipFile(CString strFilePath, CString strTempPath)</div><div class="line">  <span class="number">8</span> &#123;</div><div class="line">  <span class="number">9</span>     <span class="keyword">int</span> nReturnValue;</div><div class="line"> <span class="number">10</span> </div><div class="line"> <span class="number">11</span>     <span class="comment">//打开zip文件</span></div><div class="line"> <span class="number">12</span>     unzFile unzfile = unzOpen(strFilePath);                    </div><div class="line"> <span class="number">13</span>     <span class="keyword">if</span>(unzfile == <span class="literal">NULL</span>)</div><div class="line"> <span class="number">14</span>     &#123;</div><div class="line"> <span class="number">15</span>         MessageBox(<span class="string">"打开zip文件失败!"</span>, <span class="string">"提示"</span>, MB_OK|MB_ICONWARNING);</div><div class="line"> <span class="number">16</span>         <span class="keyword">return</span>;</div><div class="line"> <span class="number">17</span>     &#125;</div><div class="line"> <span class="number">18</span> </div><div class="line"> <span class="number">19</span>     <span class="comment">//获取zip文件的信息</span></div><div class="line"> <span class="number">20</span>     unz_global_info* pGlobalInfo = <span class="keyword">new</span> unz_global_info;</div><div class="line"> <span class="number">21</span>     nReturnValue = unzGetGlobalInfo(unzfile, pGlobalInfo);</div><div class="line"> <span class="number">22</span>     <span class="keyword">if</span>(nReturnValue != UNZ_OK)</div><div class="line"> <span class="number">23</span>     &#123;</div><div class="line"> <span class="number">24</span>         MessageBox(<span class="string">"获取zip文件信息失败!"</span>, <span class="string">"提示"</span>, MB_OK|MB_ICONWARNING);</div><div class="line"> <span class="number">25</span>         <span class="keyword">return</span>;</div><div class="line"> <span class="number">26</span>     &#125;</div><div class="line"> <span class="number">27</span> </div><div class="line"> <span class="number">28</span>     <span class="comment">//解析zip文件</span></div><div class="line"> <span class="number">29</span>     unz_file_info* pFileInfo = <span class="keyword">new</span> unz_file_info;</div><div class="line"> <span class="number">30</span>     <span class="keyword">char</span> szZipFName[MAX_PATH];                            <span class="comment">//存放从zip中解析出来的内部文件名</span></div><div class="line"> <span class="number">31</span>     <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;pGlobalInfo-&gt;number_entry; i++)</div><div class="line"> <span class="number">32</span>     &#123;</div><div class="line"> <span class="number">33</span>         <span class="comment">//解析得到zip中的文件信息</span></div><div class="line"> <span class="number">34</span>         nReturnValue = unzGetCurrentFileInfo(unzfile, pFileInfo, szZipFName, MAX_PATH, </div><div class="line"> <span class="number">35</span>             <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="number">0</span>);</div><div class="line"> <span class="number">36</span>         <span class="keyword">if</span>(nReturnValue != UNZ_OK)</div><div class="line"> <span class="number">37</span>         &#123;</div><div class="line"> <span class="number">38</span>             MessageBox(<span class="string">"解析zip文件信息失败!"</span>, <span class="string">"提示"</span>, MB_OK|MB_ICONWARNING);</div><div class="line"> <span class="number">39</span>             <span class="keyword">return</span>;</div><div class="line"> <span class="number">40</span>         &#125;</div><div class="line"> <span class="number">41</span> </div><div class="line"> <span class="number">42</span>         <span class="comment">//判断是文件夹还是文件</span></div><div class="line"> <span class="number">43</span>         <span class="keyword">switch</span>(pFileInfo-&gt;external_fa)</div><div class="line"> <span class="number">44</span>         &#123;</div><div class="line"> <span class="number">45</span>         <span class="keyword">case</span> FILE_ATTRIBUTE_DIRECTORY:                    <span class="comment">//文件夹</span></div><div class="line"> <span class="number">46</span>             &#123;</div><div class="line"> <span class="number">47</span>                 CString strDiskPath = strTempPath + _T(<span class="string">"//"</span>) + szZipFName;</div><div class="line"> <span class="number">48</span>                 CreateDirectory(strDiskPath, <span class="literal">NULL</span>);</div><div class="line"> <span class="number">49</span>             &#125;</div><div class="line"> <span class="number">50</span>             <span class="keyword">break</span>;</div><div class="line"> <span class="number">51</span>         <span class="keyword">default</span>:                                        <span class="comment">//文件</span></div><div class="line"> <span class="number">52</span>             &#123;</div><div class="line"> <span class="number">53</span>                 <span class="comment">//创建文件</span></div><div class="line"> <span class="number">54</span>                 CString strDiskFile = strTempPath + _T(<span class="string">"//"</span>) + szZipFName;</div><div class="line"> <span class="number">55</span>                 HANDLE hFile = CreateFile(strDiskFile, GENERIC_WRITE,</div><div class="line"> <span class="number">56</span>                     <span class="number">0</span>, <span class="literal">NULL</span>, OPEN_ALWAYS, FILE_FLAG_WRITE_THROUGH, <span class="literal">NULL</span>);</div><div class="line"> <span class="number">57</span>                 <span class="keyword">if</span>(hFile == INVALID_HANDLE_VALUE)</div><div class="line"> <span class="number">58</span>                 &#123;</div><div class="line"> <span class="number">59</span>                     MessageBox(<span class="string">"创建文件失败!"</span>, <span class="string">"提示"</span>, MB_OK|MB_ICONWARNING);</div><div class="line"> <span class="number">60</span>                     <span class="keyword">return</span>;</div><div class="line"> <span class="number">61</span>                 &#125;</div><div class="line"> <span class="number">62</span> </div><div class="line"> <span class="number">63</span>                 <span class="comment">//打开文件</span></div><div class="line"> <span class="number">64</span>                 nReturnValue = unzOpenCurrentFile(unzfile);</div><div class="line"> <span class="number">65</span>                 <span class="keyword">if</span>(nReturnValue != UNZ_OK)</div><div class="line"> <span class="number">66</span>                 &#123;</div><div class="line"> <span class="number">67</span>                     MessageBox(<span class="string">"打开文件失败!"</span>, <span class="string">"提示"</span>, MB_OK|MB_ICONWARNING);</div><div class="line"> <span class="number">68</span>                     CloseHandle(hFile);</div><div class="line"> <span class="number">69</span>                     <span class="keyword">return</span>;</div><div class="line"> <span class="number">70</span>                 &#125;</div><div class="line"> <span class="number">71</span> </div><div class="line"> <span class="number">72</span>                 <span class="comment">//读取文件</span></div><div class="line"> <span class="number">73</span>                 <span class="keyword">const</span> <span class="keyword">int</span> BUFFER_SIZE = <span class="number">4096</span>;</div><div class="line"> <span class="number">74</span>                 <span class="keyword">char</span> szReadBuffer[BUFFER_SIZE];</div><div class="line"> <span class="number">75</span>                 <span class="keyword">while</span>(TRUE)</div><div class="line"> <span class="number">76</span>                 &#123;</div><div class="line"> <span class="number">77</span>                     <span class="built_in">memset</span>(szReadBuffer, <span class="number">0</span>, BUFFER_SIZE);</div><div class="line"> <span class="number">78</span>                     <span class="keyword">int</span> nReadFileSize = unzReadCurrentFile(unzfile, szReadBuffer, BUFFER_SIZE);</div><div class="line"> <span class="number">79</span>                     <span class="keyword">if</span>(nReadFileSize &lt; <span class="number">0</span>)                <span class="comment">//读取文件失败</span></div><div class="line"> <span class="number">80</span>                     &#123;</div><div class="line"> <span class="number">81</span>                         MessageBox(<span class="string">"读取文件失败!"</span>, <span class="string">"提示"</span>, MB_OK|MB_ICONWARNING);</div><div class="line"> <span class="number">82</span>                         unzCloseCurrentFile(unzfile);</div><div class="line"> <span class="number">83</span>                         CloseHandle(hFile);</div><div class="line"> <span class="number">84</span>                         <span class="keyword">return</span>;</div><div class="line"> <span class="number">85</span>                     &#125;</div><div class="line"> <span class="number">86</span>                     <span class="keyword">else</span> <span class="keyword">if</span>(nReadFileSize == <span class="number">0</span>)            <span class="comment">//读取文件完毕</span></div><div class="line"> <span class="number">87</span>                     &#123;</div><div class="line"> <span class="number">88</span>                         unzCloseCurrentFile(unzfile);</div><div class="line"> <span class="number">89</span>                         CloseHandle(hFile);</div><div class="line"> <span class="number">90</span>                         <span class="keyword">break</span>;</div><div class="line"> <span class="number">91</span>                     &#125;</div><div class="line"> <span class="number">92</span>                     <span class="keyword">else</span>                                <span class="comment">//写入读取的内容</span></div><div class="line"> <span class="number">93</span>                     &#123;</div><div class="line"> <span class="number">94</span>                         DWORD dWrite = <span class="number">0</span>;</div><div class="line"> <span class="number">95</span>                         BOOL bWriteSuccessed = WriteFile(hFile, szReadBuffer, BUFFER_SIZE, &amp;dWrite, <span class="literal">NULL</span>);</div><div class="line"> <span class="number">96</span>                         <span class="keyword">if</span>(!bWriteSuccessed)</div><div class="line"> <span class="number">97</span>                         &#123;</div><div class="line"> <span class="number">98</span>                             MessageBox(<span class="string">"读取文件失败!"</span>, <span class="string">"提示"</span>, MB_OK|MB_ICONWARNING);</div><div class="line"> <span class="number">99</span>                             unzCloseCurrentFile(unzfile);</div><div class="line"><span class="number">100</span>                             CloseHandle(hFile);</div><div class="line"><span class="number">101</span>                             <span class="keyword">return</span>;</div><div class="line"><span class="number">102</span>                         &#125;</div><div class="line"><span class="number">103</span>                     &#125;</div><div class="line"><span class="number">104</span>                 &#125;</div><div class="line"><span class="number">105</span>             &#125;</div><div class="line"><span class="number">106</span>             <span class="keyword">break</span>;</div><div class="line"><span class="number">107</span>         &#125;</div><div class="line"><span class="number">108</span>         unzGoToNextFile(unzfile);</div><div class="line"><span class="number">109</span>     &#125;</div><div class="line"><span class="number">110</span> </div><div class="line"><span class="number">111</span>     <span class="comment">//关闭</span></div><div class="line"><span class="number">112</span>     <span class="keyword">if</span>(unzfile)</div><div class="line"><span class="number">113</span>     &#123;</div><div class="line"><span class="number">114</span>         unzClose(unzfile);</div><div class="line"><span class="number">115</span>     &#125;</div><div class="line"><span class="number">116</span> &#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/jimobuwu/jimobuwu.github.io/2017/03/12/minizip/" data-id="cj0635bto0004la1ue0kmpmyf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/12/07/mian-shi-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JJ笔试题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/C-11/">C++11</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cocos2d-x/">Cocos2d-x</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cocos2d-x优化/">Cocos2d-x优化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shader/">shader</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具库/">工具库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔试题/">笔试题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/12/minizip/">minizip</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/07/mian-shi-1/">JJ笔试题</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/05/shader-gray/">shader置灰</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/05/ndk-crash-log/">利用NDK崩溃日志查找BUG</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/04/han-nuo-ta/">汉诺塔</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 LL<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
