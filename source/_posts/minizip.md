@@ -10,7 +10,7 @@ minizip时zlib的上层库，它封装了与zip文件相关的操作。
 minizip中与解压缩相关的API:  
 * `unzFile unzOpen(const char *path);`  
 打开压缩文件
-
+<!--more-->
 * `int unzGetGlobalInfo(unzFile file, unz_global_info* pglobal_info);`  
 获取zip压缩文件的信息（内部文件个数），保存在pglobal_info
 
