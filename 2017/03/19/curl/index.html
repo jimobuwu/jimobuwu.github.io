@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://github.com/jimobuwu/jimobuwu.github.io/2017/03/19/curl/index.html">
 <meta property="og:site_name" content="QUAKE">
 <meta property="og:description" content="curl是一个文件传输工具，利用url语法在命令行下工作，通过http，ftp等方式下载。库：libcurllibcurl提供了两种模式，两套接口。Easy接口：    同步，高效，容易使用Multi接口：    异步，在单线程或者多线程中提供并发传输，">
-<meta property="og:updated_time" content="2017-03-19T07:51:43.000Z">
+<meta property="og:updated_time" content="2017-03-19T08:19:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="curl">
 <meta name="twitter:description" content="curl是一个文件传输工具，利用url语法在命令行下工作，通过http，ftp等方式下载。库：libcurllibcurl提供了两种模式，两套接口。Easy接口：    同步，高效，容易使用Multi接口：    异步，在单线程或者多线程中提供并发传输，">
@@ -102,7 +102,12 @@
 <ul>
 <li><code>CURLOPT_URL</code><br>设置url</li>
 <li><code>CURLOPT_CONNECTTIMEOUT</code><br>连接超时时间</li>
-<li><code>CURLOPT_HTTP_CONTENT_DECODING</code><br>打开解码。lua中请求时，参数headers理由设置“Accept-Encoding：gzip”<br><em>支持三种编码：</em><br>identity，不压缩<br>deflate，zlib压缩<br>gzip，gzip压缩  </li>
+<li><code>CURLOPT_HTTP_CONTENT_DECODING</code><br>打开解码。lua中请求时，参数headers理由设置“Accept-Encoding：gzip”<br><em>支持三种编码：</em>  <ul>
+<li>identity，不压缩  </li>
+<li>deflate，zlib压缩  </li>
+<li>gzip，gzip压缩  </li>
+</ul>
+</li>
 <li><code>CURLOPT_WRITEFUNCTION</code><br>相应数据回调函数</li>
 <li><code>CURLOPT_WRITEDATA</code><br>设置传入上面的回调函数的参数 </li>
 <li><code>CURLOPT_HEADERFUNCTION</code><br>头数据写入回调,获取头部信息</li>
@@ -112,11 +117,12 @@
 <li><code>CURLOPT_PROGRESSDATA</code><br>传入进度回调函数的参数</li>
 <li><code>CURLOPT_FOLLOWLOCATION</code><br>允许3XX重定向<br>301，永久移动，请求的网页永久移动到新的位置<br>302，临时移动</li>
 </ul>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><p>http上传：在页面创建个form表单，表单的enctype属性为multipart／form-data，action为上传的url，请求方式是post。<br>curl上传，就是完成一个multipart/form-data http post请求。<br>curl_formadd</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/jimobuwu/jimobuwu.github.io/2017/03/19/curl/" data-id="cj0gdw4ns00018m1uotzti8zp" class="article-share-link">Share</a>
+      <a data-url="https://github.com/jimobuwu/jimobuwu.github.io/2017/03/19/curl/" data-id="cj0gew6js0001sm1ujopcr5mt" class="article-share-link">Share</a>
       
       
     </footer>
