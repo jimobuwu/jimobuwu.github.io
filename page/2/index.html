@@ -64,6 +64,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-binary-search" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/04/binary-search/" class="article-date">
+  <time datetime="2016-12-03T16:57:09.000Z" itemprop="datePublished">2016-12-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/算法/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/04/binary-search/">二分查找</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">binary_search</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> size, <span class="keyword">int</span> key)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> low, high, mid;</div><div class="line">    low = <span class="number">0</span>;</div><div class="line">    high = size - <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">while</span> (low &lt;= high)</div><div class="line">    &#123;</div><div class="line">        mid = (low + high) / <span class="number">2</span>;</div><div class="line">        <span class="keyword">if</span> (arr[mid] == key)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> mid;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (arr[mid] &lt; key)</div><div class="line">        &#123;</div><div class="line">            low = mid + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (arr[mid] &gt; key)</div><div class="line">        &#123;</div><div class="line">            high = mid - <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2016/12/04/binary-search/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/jimobuwu/jimobuwu.github.io/2016/12/04/binary-search/" data-id="cj0gg7gmz0000461uja173abw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hot-update" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/12/03/hot-update/" class="article-date">
@@ -103,7 +148,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/jimobuwu/jimobuwu.github.io/2016/12/03/hot-update/" data-id="cj0gfg3770009ty1ujpizvo89" class="article-share-link">Share</a>
+      <a data-url="https://github.com/jimobuwu/jimobuwu.github.io/2016/12/03/hot-update/" data-id="cj0gg7gnp000b461us1uk6ca7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -144,7 +189,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/jimobuwu/jimobuwu.github.io/2016/12/03/skeletonanimation-data-interface/" data-id="cj0gfg37m000kty1uueywsii2" class="article-share-link">Share</a>
+      <a data-url="https://github.com/jimobuwu/jimobuwu.github.io/2016/12/03/skeletonanimation-data-interface/" data-id="cj0gg7go3000m461ujmwnk9ks" class="article-share-link">Share</a>
       
       
     </footer>
@@ -167,7 +212,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/C-11/">C++11</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cocos2d-x/">Cocos2d-x</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cocos2d-x优化/">Cocos2d-x优化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shader/">shader</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础/">基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具库/">工具库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔试题/">笔试题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/C-11/">C++11</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cocos2d-x/">Cocos2d-x</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cocos2d-x优化/">Cocos2d-x优化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shader/">shader</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础/">基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具库/">工具库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔试题/">笔试题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li></ul>
     </div>
   </div>
 
@@ -195,6 +240,10 @@
       <ul>
         
           <li>
+            <a href="/2017/03/19/gitignore/">gitignore</a>
+          </li>
+        
+          <li>
             <a href="/2017/03/19/c文件操作/">c文件操作</a>
           </li>
         
@@ -208,10 +257,6 @@
         
           <li>
             <a href="/2017/03/12/minizip/">minizip</a>
-          </li>
-        
-          <li>
-            <a href="/2016/12/07/mian-shi-1/">JJ笔试题</a>
           </li>
         
       </ul>
