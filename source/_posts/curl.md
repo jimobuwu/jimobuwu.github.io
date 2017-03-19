@@ -29,9 +29,9 @@ curl_easy_setopt中的参数设置：
 * `CURLOPT_HTTP_CONTENT_DECODING`  
 打开解码。lua中请求时，参数headers理由设置“Accept-Encoding：gzip”  
 *支持三种编码：*  
-identity，不压缩  
-deflate，zlib压缩  
-gzip，gzip压缩  
+    - identity，不压缩  
+    - deflate，zlib压缩  
+    - gzip，gzip压缩  
 * `CURLOPT_WRITEFUNCTION`  
 相应数据回调函数
 * `CURLOPT_WRITEDATA`  
@@ -48,8 +48,15 @@ gzip，gzip压缩
 传入进度回调函数的参数
 * `CURLOPT_FOLLOWLOCATION`  
 允许3XX重定向  
-301，永久移动，请求的网页永久移动到新的位置
+301，永久移动，请求的网页永久移动到新的位置  
 302，临时移动
+
+### 文件上传
+http上传：在页面创建个form表单，表单的enctype属性为multipart／form-data，action为上传的url，请求方式是post。  
+curl上传，就是完成一个multipart/form-data http post请求。  
+curl_formadd
+
+
 
 
 
