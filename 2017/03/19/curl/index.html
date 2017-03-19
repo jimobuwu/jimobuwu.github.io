@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: C++11 | QUAKE</title>
+  <title>curl | QUAKE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="day day study">
-<meta property="og:type" content="website">
-<meta property="og:title" content="QUAKE">
-<meta property="og:url" content="https://github.com/jimobuwu/jimobuwu.github.io/categories/C-11/index.html">
+  <meta name="description" content="curl是一个文件传输工具，利用url语法在命令行下工作，通过http，ftp等方式下载。库：libcurllibcurl提供了两种模式，两套接口。Easy接口：    同步，高效，容易使用Multi接口：    异步，在单线程或者多线程中提供并发传输，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="curl">
+<meta property="og:url" content="https://github.com/jimobuwu/jimobuwu.github.io/2017/03/19/curl/index.html">
 <meta property="og:site_name" content="QUAKE">
-<meta property="og:description" content="day day study">
+<meta property="og:description" content="curl是一个文件传输工具，利用url语法在命令行下工作，通过http，ftp等方式下载。库：libcurllibcurl提供了两种模式，两套接口。Easy接口：    同步，高效，容易使用Multi接口：    异步，在单线程或者多线程中提供并发传输，">
+<meta property="og:updated_time" content="2017-03-19T07:51:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="QUAKE">
-<meta name="twitter:description" content="day day study">
+<meta name="twitter:title" content="curl">
+<meta name="twitter:description" content="curl是一个文件传输工具，利用url语法在命令行下工作，通过http，ftp等方式下载。库：libcurllibcurl提供了两种模式，两套接口。Easy接口：    同步，高效，容易使用Multi接口：    异步，在单线程或者多线程中提供并发传输，">
   
     <link rel="alternate" href="/atom.xml" title="QUAKE" type="application/atom+xml">
   
@@ -62,39 +63,78 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/12/04/c-11-introduce/" class="archive-article-date">
-  <time datetime="2016-12-03T17:10:03.000Z" itemprop="datePublished">12月 4</time>
+        <section id="main"><article id="post-curl" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/19/curl/" class="article-date">
+  <time datetime="2017-03-19T05:33:54.000Z" itemprop="datePublished">2017-03-19</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/工具库/">工具库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/12/04/c-11-introduce/">c++11特性简介</a>
+    <h1 class="article-title" itemprop="name">
+      curl
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://curl.haxx.se" target="_blank" rel="external">curl</a>是一个文件传输工具，利用url语法在命令行下工作，通过http，ftp等方式下载。<br>库：libcurl<br>libcurl提供了两种模式，两套接口。<br>Easy接口：<br>    同步，高效，容易使用<br>Multi接口：<br>    异步，在单线程或者多线程中提供并发传输，</p>
+<a id="more"></a>
+<h3 id="接口函数"><a href="#接口函数" class="headerlink" title="接口函数"></a>接口函数</h3><ul>
+<li><code>curl_easy_init</code>，初始化并获取一个handler</li>
+<li><code>curl_easy_setopt(m_curl, 配置项宏，配置值)</code>,设置参数  </li>
+<li><code>curl_easy_perform</code>,开始传输数据，因为是同步，线程在此阻塞</li>
+<li><code>curl_easy_getinfo</code>,在传输回调过程中或传输结束后，获取相关信息</li>
+<li><code>curl_easy_cleanup</code>,清除handle</li>
+</ul>
+<p>curl_easy_setopt中的参数设置：  </p>
+<ul>
+<li><code>CURLOPT_URL</code><br>设置url</li>
+<li><code>CURLOPT_CONNECTTIMEOUT</code><br>连接超时时间</li>
+<li><code>CURLOPT_HTTP_CONTENT_DECODING</code><br>打开解码。lua中请求时，参数headers理由设置“Accept-Encoding：gzip”<br><em>支持三种编码：</em><br>identity，不压缩<br>deflate，zlib压缩<br>gzip，gzip压缩  </li>
+<li><code>CURLOPT_WRITEFUNCTION</code><br>相应数据回调函数</li>
+<li><code>CURLOPT_WRITEDATA</code><br>设置传入上面的回调函数的参数 </li>
+<li><code>CURLOPT_HEADERFUNCTION</code><br>头数据写入回调,获取头部信息</li>
+<li><code>CURLOPT_WRITEHEADER</code><br>传入上面的函数的参数</li>
+<li><code>CURLOPT_NOPROGRESS</code><br>打开进度</li>
+<li><code>CURLOPT_PROGRESSFUNCTION</code><br>进度回调函数</li>
+<li><code>CURLOPT_PROGRESSDATA</code><br>传入进度回调函数的参数</li>
+<li><code>CURLOPT_FOLLOWLOCATION</code><br>允许3XX重定向<br>301，永久移动，请求的网页永久移动到新的位置<br>302，临时移动</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/jimobuwu/jimobuwu.github.io/2017/03/19/curl/" data-id="cj0gdw4ns00018m1uotzti8zp" class="article-share-link">Share</a>
+      
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/17/filemode/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">文件打开模式</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         
