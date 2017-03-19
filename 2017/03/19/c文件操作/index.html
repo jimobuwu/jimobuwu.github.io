@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: Android | QUAKE</title>
+  <title>c文件操作 | QUAKE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="day day study">
-<meta property="og:type" content="website">
-<meta property="og:title" content="QUAKE">
-<meta property="og:url" content="https://github.com/jimobuwu/jimobuwu.github.io/categories/Android/index.html">
+  <meta name="description" content="1234567891011FILE *fp = fopen(fullpath.c_str(), mode)fseek(fp, 0, SEEK_END);         //指向文件尾部size = ftell(fp);               //fp位置到文件首部的偏移字节数fseek(fp, 0 ,SEEK_SET);         //指向文件头部char input[30];fre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c文件操作">
+<meta property="og:url" content="https://github.com/jimobuwu/jimobuwu.github.io/2017/03/19/c文件操作/index.html">
 <meta property="og:site_name" content="QUAKE">
-<meta property="og:description" content="day day study">
+<meta property="og:description" content="1234567891011FILE *fp = fopen(fullpath.c_str(), mode)fseek(fp, 0, SEEK_END);         //指向文件尾部size = ftell(fp);               //fp位置到文件首部的偏移字节数fseek(fp, 0 ,SEEK_SET);         //指向文件头部char input[30];fre">
+<meta property="og:updated_time" content="2017-03-19T08:34:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="QUAKE">
-<meta name="twitter:description" content="day day study">
+<meta name="twitter:title" content="c文件操作">
+<meta name="twitter:description" content="1234567891011FILE *fp = fopen(fullpath.c_str(), mode)fseek(fp, 0, SEEK_END);         //指向文件尾部size = ftell(fp);               //fp位置到文件首部的偏移字节数fseek(fp, 0 ,SEEK_SET);         //指向文件头部char input[30];fre">
   
     <link rel="alternate" href="/atom.xml" title="QUAKE" type="application/atom+xml">
   
@@ -62,39 +63,56 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/12/05/ndk-crash-log/" class="archive-article-date">
-  <time datetime="2016-12-05T14:00:41.000Z" itemprop="datePublished">12月 5</time>
+        <section id="main"><article id="post-c文件操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/19/c文件操作/" class="article-date">
+  <time datetime="2017-03-19T08:25:11.000Z" itemprop="datePublished">2017-03-19</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C/">C</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/12/05/ndk-crash-log/">利用NDK崩溃日志查找BUG</a>
+    <h1 class="article-title" itemprop="name">
+      c文件操作
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">FILE *fp = fopen(fullpath.c_str(), mode)</div><div class="line">fseek(fp, <span class="number">0</span>, SEEK_END);         <span class="comment">//指向文件尾部</span></div><div class="line">size = ftell(fp);               <span class="comment">//fp位置到文件首部的偏移字节数</span></div><div class="line">fseek(fp, <span class="number">0</span> ,SEEK_SET);         <span class="comment">//指向文件头部</span></div><div class="line"></div><div class="line"><span class="keyword">char</span> input[<span class="number">30</span>];</div><div class="line">fread(input, size, <span class="keyword">sizeof</span>(<span class="keyword">char</span>), fp); <span class="comment">//从fp读取input</span></div><div class="line"></div><div class="line">fclose(fp);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">rename</span><span class="params">(<span class="keyword">char</span>* oldname, <span class="keyword">char</span>* newname)</span></span>; <span class="comment">//文件重命名</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/jimobuwu/jimobuwu.github.io/2017/03/19/c文件操作/" data-id="cj0gfg3700004ty1umkc9wu30" class="article-share-link">Share</a>
+      
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/19/curl/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">curl</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         
